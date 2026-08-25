@@ -23,19 +23,18 @@ def test_load_translations_normalizes_language_and_patches_argparse(
     translation_path.__truediv__.return_value = locale_path
     resource_files = Mock(return_value=translation_path)
     translation_loader = Mock(return_value=translation)
-    normalize = Mock(return_value="zh_CN.UTF-8")
 
     monkeypatch.setattr(loader.importlib.resources, "files", resource_files)
     monkeypatch.setattr(loader.gettext, "translation", translation_loader)
-    monkeypatch.setattr(loader.locale, "normalize", normalize)
 
-    loader.load_translations("zh_CN")
+    loader.load_translations("zh-CN")  # 预期函数内会替换为 zh_CN
 
-    normalize.assert_called_once_with("zh_CN")
     resource_files.assert_called_once_with("ajaw")
     translation_loader.assert_called_once_with("argparse", str(locale_path), ["zh_CN"])
-    assert vars(argparse)["_"] is translation.gettext
-    assert vars(argparse)["ngettext"] is translation.ngettext
+    # ty: ignore[unresolved-attribute]
+    assert argparse._ is translation.gettext # pyright: ignore[reportUnknownMemberType, reportAttributeAccessIssue]
+    # ty: ignore[unresolved-attribute]
+    assert argparse.ngettext is translation.ngettext # pyright: ignore[reportUnknownMemberType, reportAttributeAccessIssue]
 
 
 def test_load_translations_detects_language_when_not_provided(
