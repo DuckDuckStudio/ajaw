@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 提交翻译问题
+    url: https://github.com/DuckDuckStudio/python-argparse-translations/issues
+    about: 翻译问题应向 DuckDuckStudio/python-argparse-translations 仓库提交

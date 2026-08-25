@@ -1,0 +1,66 @@
+[project]
+name = "ajaw"
+version = "0.0.1"
+description = "为标准库 argparse 加载翻译。"
+keywords = [
+    "argparse",
+    "i18n",
+    "l10n",
+    "translation",
+    "gettext",
+    "localization",
+]
+readme = "README.md"
+authors = [{ name = "鸭鸭「カモ」" }]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Natural Language :: Chinese (Simplified)",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Internationalization",
+    "Typing :: Typed",
+]
+license = "Apache-2.0"
+license-files = ["LICENSE.txt"]
+requires-python = ">=3.10"
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/DuckDuckStudio/ajaw"
+Repository = "https://github.com/DuckDuckStudio/ajaw"
+Issues = "https://github.com/DuckDuckStudio/ajaw/issues"
+Changelog = "https://github.com/DuckDuckStudio/ajaw/releases"
+PyPI = "https://pypi.org/project/ajaw/"
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "ajaw"
+module-root = ""
+
+[dependency-groups]
+dev = [
+    "isort~=8.0.1",
+    "pylint~=4.0.7",
+    "pytest~=9.1.1",
+    "pytest-cov~=7.1.0",
+    "requests~=2.34.2",
+    "ruff~=0.16.4",
+    "ty~=0.0.74",
+]
+
+[tool.pylint.MAIN]
+max-line-length = 200
+
+[tool.pytest.ini_options]
+testpaths = "tests"
+addopts = "--cov ajaw"
