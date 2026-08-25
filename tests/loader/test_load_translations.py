@@ -32,9 +32,9 @@ def test_load_translations_normalizes_language_and_patches_argparse(
     resource_files.assert_called_once_with("ajaw")
     translation_loader.assert_called_once_with("argparse", str(locale_path), ["zh_CN"])
     # ty: ignore[unresolved-attribute]
-    assert argparse._ is translation.gettext # pyright: ignore[reportUnknownMemberType, reportAttributeAccessIssue]
+    assert argparse._ is translation.gettext  # pyright: ignore[reportUnknownMemberType, reportAttributeAccessIssue]
     # ty: ignore[unresolved-attribute]
-    assert argparse.ngettext is translation.ngettext # pyright: ignore[reportUnknownMemberType, reportAttributeAccessIssue]
+    assert argparse.ngettext is translation.ngettext  # pyright: ignore[reportUnknownMemberType, reportAttributeAccessIssue]
 
 
 def test_load_translations_detects_language_when_not_provided(
