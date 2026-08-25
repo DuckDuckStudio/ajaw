@@ -34,7 +34,9 @@ def load_translations(lang: str | None = None) -> None:
     加载并应用随包内置的 argparse 翻译文件。
     """
 
-    lang = locale.normalize(lang).split(".")[0] if lang else _detect_language()
+    lang = (
+        locale.normalize(lang).split(".")[0] if lang else _detect_language()
+    ).replace("-", "_")
 
     t = gettext.translation(
         "argparse", str(importlib.resources.files("ajaw") / "locale"), [lang]
