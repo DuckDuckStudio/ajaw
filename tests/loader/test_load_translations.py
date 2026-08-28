@@ -7,7 +7,7 @@ from unittest.mock import MagicMock, Mock
 
 import pytest
 
-from ajaw import loader
+from ajaw import BUNDLED_LANGUAGES, loader
 
 
 def test_load_translations_normalizes_language_and_patches_argparse(
@@ -58,3 +58,39 @@ def test_load_translations_detects_language_when_not_provided(
 
     detect_language.assert_called_once_with()
     translation_loader.assert_called_once_with("argparse", "package/locale", ["zh_CN"])
+
+
+def test_load_translations_skips_english(monkeypatch: pytest.MonkeyPatch) -> None:
+    """验证英文环境不加载翻译。"""
+
+    translation_loader = Mock()
+    monkeypatch.setattr(loader.gettext, "translation", translation_loader)
+
+    loader.load_translations("en_US")
+
+    translation_loader.assert_not_called()
+
+
+def test_load_translations_raises_for_unsupported_explicit_language() -> None:
+    """验证指定不支持的语言时会抛出异常。"""
+
+    assert "fr_FR" not in BUNDLED_LANGUAGES
+
+    with pytest.raises(ValueError, match=r"没有 fr \(fr_FR\) 的翻译"):
+        loader.load_translations("fr")
+
+
+def test_load_translations_skips_unsupported_detected_language(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """验证自动检测到不支持的语言时不会加载翻译。"""
+
+    translation_loader = Mock()
+    detect_language = Mock(return_value="fr_FR")
+    monkeypatch.setattr(loader, "_detect_language", detect_language)
+    monkeypatch.setattr(loader.gettext, "translation", translation_loader)
+
+    loader.load_translations()
+
+    detect_language.assert_called_once_with()
+    translation_loader.assert_not_called()
