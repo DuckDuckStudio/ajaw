@@ -34,11 +34,11 @@ jobs:
 
       - name: 功能测试 (wheel)
         shell: bash
-        run: uv run --isolated --no-project --with dist/*.whl --with "pytest~=8.3.5" pytest -o "addopts=" "tests/test_function.py"
+        run: uv run --isolated --no-project --with dist/*.whl --with "pytest~=9.1.1" pytest -o "addopts=" "tests/test_function.py"
 
       - name: 功能测试 (源码分发)
         shell: bash
-        run: uv run --isolated --no-project --with dist/*.tar.gz --with "pytest~=8.3.5" pytest -o "addopts=" "tests/test_function.py"
+        run: uv run --isolated --no-project --with dist/*.tar.gz --with "pytest~=9.1.1" pytest -o "addopts=" "tests/test_function.py"
 
       - name: 上传分发文件为工件
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
