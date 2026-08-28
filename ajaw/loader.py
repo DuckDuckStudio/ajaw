@@ -32,9 +32,17 @@ def _detect_language() -> str:
 def load_translations(lang: str | None = None) -> None:
     """
     加载并应用随包内置的 argparse 翻译文件。
+
+    Args:
+        lang:
+            指定的语言；
+            如果为 `None`，则尝试检测系统语言。
+
+    Raises:
+        ValueError: 指定了一个不支持的语言。
     """
 
-    lang = (
+    to_lang = (
         locale.normalize(lang).split(".")[0] if lang else _detect_language()
     ).replace("-", "_")
 
@@ -42,8 +50,15 @@ def load_translations(lang: str | None = None) -> None:
         # 不需要翻译
         return
 
+    if to_lang not in BUNDLED_LANGUAGES:
+        if lang:
+            # 指定了一个不支持的语言
+            raise ValueError(f"没有 {lang} ({to_lang}) 的翻译")
+
+        return
+
     t = gettext.translation(
-        "argparse", str(importlib.resources.files("ajaw") / "locale"), [lang]
+        "argparse", str(importlib.resources.files("ajaw") / "locale"), [to_lang]
     )
     # ty: ignore[unresolved-attribute]
     argparse._ = t.gettext  # pyright: ignore[reportAttributeAccessIssue]
