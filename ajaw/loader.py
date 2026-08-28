@@ -38,6 +38,10 @@ def load_translations(lang: str | None = None) -> None:
         locale.normalize(lang).split(".")[0] if lang else _detect_language()
     ).replace("-", "_")
 
+    if lang == "en_US":
+        # 不需要翻译
+        return
+
     t = gettext.translation(
         "argparse", str(importlib.resources.files("ajaw") / "locale"), [lang]
     )
