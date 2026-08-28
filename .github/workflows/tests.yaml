@@ -50,4 +50,11 @@ jobs:
 
       - name: 运行测试
         shell: bash
-        run: uv run pytest -vv
+        run: uv run pytest -vv --deselect tests/test_mo.py::test_bundled_mo_matches_upstream_main
+
+      - name: 检查附带的翻译文件
+        # 仅在最新的支持的 Python 版本、Ubuntu 系统中，运行一次
+        # https://github.com/DuckDuckStudio/ajaw/issues/6
+        if: ${{ matrix.os == 'ubuntu-latest' && matrix.python-version == '3.14.x' }}
+        shell: bash
+        run: uv run pytest -vv tests/test_mo.py::test_bundled_mo_matches_upstream_main
