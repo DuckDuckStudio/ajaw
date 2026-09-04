@@ -18,7 +18,7 @@ pip install -i https://test.pypi.org/simple/ ajaw
 ```python
 import ajaw
 
-# 自动检测，默认为 zh_CN
+# 自动检测
 ajaw.load_translations()
 
 # 指定语言
