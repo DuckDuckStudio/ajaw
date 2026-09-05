@@ -15,6 +15,16 @@ pip install ajaw
 pip install -i https://test.pypi.org/simple/ ajaw
 ```
 
+```python
+import ajaw
+
+# 自动检测
+ajaw.load_translations()
+
+# 指定语言
+ajaw.load_translations(lang="zh-CN")
+```
+
 ## 许可
 
 本项目采用 [Apache License 2.0](LICENSE.txt) 许可协议。
