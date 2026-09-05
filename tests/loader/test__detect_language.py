@@ -17,9 +17,9 @@ def test_detect_language_returns_system_language(
     assert loader._detect_language() == "en_US"  # pyright: ignore[reportPrivateUsage] pylint: disable=protected-access / W0212
 
 
-def test_detect_language_falls_back_to_zh_cn(monkeypatch: pytest.MonkeyPatch) -> None:
-    """验证系统语言不可用时回退到简体中文。"""
+def test_detect_language_falls_return_none(monkeypatch: pytest.MonkeyPatch) -> None:
+    """验证系统语言不可用时返回 `None`。"""
 
     monkeypatch.setattr(loader.locale, "getdefaultlocale", lambda: (None, None))
 
-    assert loader._detect_language() == "zh_CN"  # pyright: ignore[reportPrivateUsage] pylint: disable=protected-access / W0212
+    assert loader._detect_language() is None  # pyright: ignore[reportPrivateUsage] pylint: disable=protected-access / W0212

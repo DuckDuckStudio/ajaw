@@ -16,16 +16,16 @@ ajaw 中附带的翻译语言。
 """
 
 
-def _detect_language() -> str:
+def _detect_language() -> str | None:
     """
-    检测系统的语言代码，失败返回默认的 `zh_CN`。
+    检测系统的语言代码，失败返回 `None`。
 
     Returns:
-        str: 检测到的系统语言代码，失败返回默认的 `zh_CN`。
+        str: 检测到的系统语言代码，失败返回 `None`。
     """
 
     # fmt: off
-    return locale.getdefaultlocale()[0] or "zh_CN"  # https://github.com/python/cpython/issues/130796 pylint: disable=deprecated-method / W4902
+    return locale.getdefaultlocale()[0]  # https://github.com/python/cpython/issues/130796 pylint: disable=deprecated-method / W4902
     # fmt: on
 
 
@@ -42,11 +42,11 @@ def load_translations(lang: str | None = None) -> None:
         ValueError: 指定了一个不支持的语言。
     """
 
-    to_lang = (
-        locale.normalize(lang).split(".")[0] if lang else _detect_language()
-    ).replace("-", "_")
+    to_lang = locale.normalize(lang).split(".")[0] if lang else _detect_language()
+    if to_lang:
+        to_lang = to_lang.replace("-", "_")
 
-    if lang == "en_US":
+    if (not to_lang) or (to_lang == "en_US"):
         # 不需要翻译
         return
 
