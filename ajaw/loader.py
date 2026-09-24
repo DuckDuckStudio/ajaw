@@ -10,7 +10,7 @@ import importlib.resources
 import locale
 from typing import Final
 
-BUNDLED_LANGUAGES: Final = ("zh_CN",)
+BUNDLED_LANGUAGES: Final = ("zh_CN", "zh_TW")
 """
 ajaw 中附带的翻译语言。
 """
