@@ -1,6 +1,6 @@
 # ajaw
 
-[![Pypi 上的版本](https://img.shields.io/pypi/v/ajaw.svg)](https://pypi.org/project/ajaw)  
+[![Pypi 上的版本](https://img.shields.io/pypi/v/ajaw.svg)](https://pypi.org/project/ajaw)
 
 <p style="text-align: center;"><a href="https://pypi.org/project/ajaw/">PyPI</a> | <a href="https://test.pypi.org/project/ajaw/">Test PyPI</a></p>
 
@@ -24,6 +24,10 @@ ajaw.load_translations()
 # 指定语言
 ajaw.load_translations(lang="zh-CN")
 ```
+
+> [!TIP]
+> 如果你使用 [PyInstaller](https://pyinstaller.org) 打包，请在打包命令中添加 `--collect-data ajaw` 以打包翻译文件（`.mo` 文件）。
+> 该参数的介绍请见 [PyInstaller 文档](https://pyinstaller.org/en/stable/usage.html#cmdoption-collect-data)。
 
 ## 许可
 
