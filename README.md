@@ -25,8 +25,8 @@ ajaw.load_translations()
 ajaw.load_translations(lang="zh-CN")
 ```
 
-> [!TIP]
-> 如果你使用 [PyInstaller](https://pyinstaller.org) 打包，请在打包命令中添加 `--collect-data ajaw` 以打包翻译文件（`.mo` 文件）。
+> [!TIP]  
+> 如果你使用 [PyInstaller](https://pyinstaller.org) 打包，请在打包命令中添加 `--collect-data ajaw` 以打包翻译文件（`.mo` 文件）。  
 > 该参数的介绍请见 [PyInstaller 文档](https://pyinstaller.org/en/stable/usage.html#cmdoption-collect-data)。
 
 ## 许可
