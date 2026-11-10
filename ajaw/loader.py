@@ -60,7 +60,7 @@ def load_translations(lang: str | None = None) -> None:
     t = gettext.translation(
         "argparse", str(importlib.resources.files("ajaw") / "locale"), [to_lang]
     )
-    # ty: ignore[unresolved-attribute]
+    # ty: ignore[missing-attribute]
     argparse._ = t.gettext  # pyright: ignore[reportAttributeAccessIssue]
-    # ty: ignore[unresolved-attribute]
+    # ty: ignore[missing-attribute]
     argparse.ngettext = t.ngettext  # pyright: ignore[reportAttributeAccessIssue]
